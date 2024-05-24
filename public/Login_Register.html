@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Web App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+    <script src="https://kit.fontawesome.com/55bc2bca78.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar" id="myNavbar">
+    <div class="menubutton"><a href="index.html">Home</a></div>
+    <div class="menubutton"><a href="#">Trading</a></div>
+    <div class="menubutton"><a href="#">Analytics</a></div>
+    <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
+    <div class="menubutton"><a href="news.html">News</a></div>
+    <div class="menubutton"><a href="about.html">About</a></div>
+
+    <div class="menubutton">
+        <div class="active">
+            <a href="Login_Register.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a>
+        </div>
+    </div>
+
+    <!--    <div class="login">-->
+    <!--        <form id="login-form">-->
+    <!--            <div class="logininput">-->
+    <!--                <input type="email" id="email-input" placeholder="Email" aria-label="Email">-->
+    <!--                <input type="password" id="password-input" placeholder="Password" aria-label="Password">-->
+    <!--            </div>-->
+    <!--            <div class="loginbuttons">-->
+    <!--                <div class="menubutton"><a id="signin-button" href="#">Signin</a></div>-->
+    <!--                <div class="menubutton"><a id="signup-button" href="#">Signup</a></div>-->
+    <!--            </div>-->
+    <!--        </form>-->
+    <!--        <div class="menubutton" style="display: none;"><a id="profile-button" href="#">Profile</a></div>-->
+    <!--    </div>-->
+</nav>
+
+<div class="container">
+
+
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Sign Up</a></li>
+            <li class="tab"><a href="#login">Log In</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Sign Up for Free</h1>
+
+                <form action="/" method="post">
+
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                First Name<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" />
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                Last Name<span class="req">*</span>
+                            </label>
+                            <input type="text"required autocomplete="off"/>
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Email Address<span class="req">*</span>
+                        </label>
+                        <input type="email"required autocomplete="off"/>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Set A Password<span class="req">*</span>
+                        </label>
+                        <input type="password"required autocomplete="off"/>
+                    </div>
+
+                    <button type="submit" class="button button-block"/>Get Started</button>
+
+                </form>
+
+            </div>
+
+            <div id="login">
+                <h1>Welcome Back!</h1>
+
+                <form action="/" method="post">
+
+                    <div class="field-wrap">
+                        <label>
+                            Email Address<span class="req">*</span>
+                        </label>
+                        <input type="email"required autocomplete="off"/>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        <input type="password"required autocomplete="off"/>
+                    </div>
+
+                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                    <button class="button button-block"/>Log In</button>
+
+                </form>
+
+            </div>
+
+        </div><!-- tab-content -->
+
+
+</div>
+
+<script src="LoginRegister.js"></script>
+<script src="firebaseapp.js"></script>
+<script src="app.js"></script>
+
+<!--<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>-->
+<!--<link-->
+<!--        type="text/css"-->
+<!--        rel="stylesheet"-->
+<!--        href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"-->
+<!--/>-->
+<!--<script src="./auth.js"></script>-->
+</body>
+</html>
