@@ -1,13 +1,17 @@
-body {
-    background-color: #181818; /* Dark background */
-    color: #e0e0e0; /* Light text */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    background-color: #181818;
+    color: #e0e0e0;
 }
 
 .container {
     max-width: 80%;
+
     margin: 20px auto;
     padding: 20px;
     background-color: #282828; /* Slightly lighter background for content */
@@ -46,73 +50,100 @@ tbody tr:nth-child(even) {
 }
 
 .navbar {
+    width: 100%;
     overflow: hidden;
     font-size: 18px;
     background-color: #333333; /* Dark background for menu */
-    padding: 1px 20px;
+    margin: 0 auto;
+    padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
-.login {
+.menu {
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-left: 10px;
+    column-gap: 10px;
 }
 
-.logininput input {
-    margin-right: 10px;
-    margin-bottom: 5px;
-    padding: 5px;
-    border: 1px solid #444444;
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 2rem;
+    height: 0;
+    width: 300px;
+    background: rgba(255,255, 255, 0.1);
+    backdrop-filter: blur(15px);
     border-radius: 4px;
-    background-color: #202020;
-    color: #e0e0e0;
+    overflow: hidden;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+}
+
+.dropdown_menu.open {
+    padding: 5px 0;
+    height: auto;
+}
+
+.dropdown_menu .menubutton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .toggle_btn{
+    display: none;
 }
 
 .menubutton a {
     display: block; /* Make the anchor tag occupy the full space of its parent */
     height: 100%; /* Make the anchor tag the same height as its parent */
-    line-height: 50px; /* Center the text vertically */
     text-decoration:none;
     text-align: center;
-    padding: 0 20px;
+    vertical-align: center;
+    padding: 20px;
     color: #e0e0e0; /* Light text for menu links */
     font-weight: 500;
     transition: color 0.3s ease; /* Smooth color transition on hover */
+    vertical-align: middle;
     &:hover {
-        color: #ffffff;
-        background: #202020;
+        color: white;
+        background: var(--main);
         border-radius: 4px;
     }
 }
 
+.menubutton .active{
+    color: white;
+    background: var(--main);
+    border-radius: 4px;
+}
 
-
-/* Media queries for responsiveness */
-@media (max-width: 600px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
+.logobutton a {
+    display: block; /* Make the anchor tag occupy the full space of its parent */
+    height: 100%; /* Make the anchor tag the same height as its parent */
+    text-decoration:none;
+    text-align: center;
+    padding: 5px;
+    color: #e0e0e0; /* Light text for menu links */
+    font-weight: 500;
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+    &:hover {
+        color: white;
+        background: var(--main);
+        border-radius: 4px;
     }
+}
 
-    .menu {
-        width: 100%;
-        justify-content: space-around;
-        margin-bottom: 10px;
-    }
-
-    .login {
-        width: 100%;
-        justify-content: space-around;
-    }
-
-    .logininput input {
-        width: calc(50% - 10px);
-    }
+.logobutton .active{
+    color: white;
+    background: var(--main);
+    border-radius: 4px;
 }
 
 .loginbuttons {
@@ -120,14 +151,33 @@ tbody tr:nth-child(even) {
     justify-content: flex-end;
 }
 
+/*Responsive Design*/
+@media (max-width: 992px) {
+    .navbar .menubutton{
+        display: none;
+    }
+    .navbar .toggle_btn {
+        display: block;
+        cursor: pointer;
+    }
+    .dropdown_menu{
+        display: block;
+    }
+}
+@media (max-width: 576px) {
+    .dropdown_menu {
+        left: 2rem;
+        width: unset;
+    }
+}
 /* Variable Declarations */
 :root {
     --body-bg: #c1bdba;
-    --form-bg: #13232f;
+    --form-bg: #282828;
     --white: #ffffff;
-    --main: #1ab188;
-    --main-light: #23c79d;
-    --main-dark: #17987a;
+    --main: #6d8c3e;
+    --main-light: #8db551;
+    --main-dark: #4b612b;
     --gray-light: #a0b3b0;
     --gray: #ddd;
     --thin: 300;
@@ -162,6 +212,7 @@ a:hover {
     margin: 40px auto;
     border-radius: var(--br);
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
+    z-index: 1;
 }
 
 .tab-group {
@@ -208,7 +259,6 @@ h1 {
 }
 
 .field-wrap label {
-    position: absolute;
     transform: translateY(6px);
     left: 13px;
     color: rgba(var(--white), .5);
@@ -256,7 +306,9 @@ textarea {
     position: relative;
     margin-bottom: 40px;
 }
-
+.field-wrap.hidden {
+    display: none;
+}
 .top-row:after {
     content: "";
     display: table;
@@ -296,6 +348,13 @@ textarea {
 .forgot {
     margin-top: -20px;
     text-align: right;
+}
+
+.signInIcons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px auto;
 }
 
 
@@ -346,6 +405,7 @@ textarea {
     box-sizing: border-box; /* Ensures padding and border are included in element's total width and height */
 }
 .form-group button {
+    margin: 10px 0;
     padding: 10px 20px;
     background-color: var(--main);
     color: #fff;
@@ -369,3 +429,31 @@ textarea {
     display: flex;
     justify-content: space-between;
 }
+
+
+
+/*Learn*/
+.indicator {
+    background: var(--main-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 20px;
+    width: 100%;
+}
+
+.indicator h2 {
+    color: var(--form-bg);
+    margin-bottom: 10px;
+}
+
+.indicator h3 {
+    color: var(--form-bg);
+    margin-top: 20px;
+}
+
+.indicator p {
+    color: var(--form-bg);
+    line-height: 1.6;
+}
+

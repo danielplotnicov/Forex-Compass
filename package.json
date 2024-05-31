@@ -1,10 +1,21 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dukascopy-node": "^1.38.0",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "firebase": "^10.12.0",
     "firebaseui": "^6.1.0",
+    "net": "^1.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "sqlite3": "^5.1.7",
     "ws": "^8.17.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.3.0",
+    "globals": "^15.3.0",
+    "typescript-eslint": "^7.11.0"
   }
 }

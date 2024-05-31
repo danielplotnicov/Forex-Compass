@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForexCompass</title>
+    <link rel="stylesheet" href="Styles.css">
+    <script src="https://kit.fontawesome.com/55bc2bca78.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+    <nav class="navbar" id="myNavbar">
+        <div class="logobutton"><a href="index.html"><img src="/Images/LogoTransparent.png" alt="Home" width="64" height="64"></a></div>
+
+        <div class="menu">
+            <div class="menubutton"><a href="#">Trading</a></div>
+            <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
+            <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
+            <div class="menubutton"><a href="News.html">News</a></div>
+            <div class="menubutton"><div class="active"><a href="About.html">About</a></div></div>
+        </div>
+
+        <div class="menubutton">
+            <a href="Login_Register.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a>
+        </div>
+
+        <div class="toggle_btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="dropdown_menu">
+        <div class="menubutton"><a href="#">Trading</a></div>
+        <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
+        <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
+        <div class="menubutton"><a href="News.html">News</a></div>
+        <div class="menubutton"><a href="About.html">About</a></div>
+
+        <div class="menubutton">
+            <a href="Login_Register.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <h1>About ForexCompass</h1>
+    <p>This web application is designed to assist users in managing their forex trading strategies. Built using JavaScript, React, and Firebase for authentication, ForexCompass provides a comprehensive platform for real-time forex data, strategy creation, and market analytics.</p>
+
+    <h2>Features</h2>
+    <ul>
+        <li><strong>Real-Time Forex Data:</strong> Access live forex pair rates to make informed trading decisions with up-to-the-minute information.</li>
+        <li><strong>Strategy Creation:</strong> Create and customize trading strategies through a user-friendly form. The application generates MetaTrader-compatible templates incorporating all necessary indicators and parameters.</li>
+        <li><strong>Market News:</strong> Stay informed with an aggregated news section that gathers relevant forex market news from multiple sources.</li>
+        <li><strong>User Management:</strong> Secure authentication for logging in, registering, and managing user profiles and settings.</li>
+        <li><strong>Analytics:</strong> Learn about indicators used in MetaTrader helping you how to create a template to import to help your analysis.</li>
+    </ul>
+
+    <h2>Our Location</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5568.557238730866!2d21.236915!3d45.74556!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47455d84610655bf%3A0xfd169ff24d29f192!2sWest%20University%20of%20Timi%C8%99oara!5e0!3m2!1sen!2sus!4v1716976871181!5m2!1sen!2sus" width="90%" height="600" style="margin: 20px 5%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <h2>Contact Us</h2>
+    <ul>
+        <li><strong>Email:</strong> <a href="mailto:info@forexwebapp.com">info@forexwebapp.com</a></li>
+        <li><strong>Phone:</strong> +1 234 567 890</li>
+        <li><strong>Address:</strong> 123 Forex Street, Currency City, FX 45678</li>
+    </ul>
+</div>
+
+<script src="Responsive.js"></script>
+<script src="FirebaseApp.js"></script>
+<script src="App.js"></script>
+<script>
+    function initMap() {
+        var location = { lat: -34.397, lng: 150.644 }; // Replace with your desired location
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: location
+        });
+        var marker = new google.maps.marker.AdvancedMarkerElement({
+            position: location,
+            map: map
+        });
+    }
+</script>
+
+</body>
+</html>

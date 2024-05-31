@@ -16,8 +16,8 @@
         <div class="menu">
             <div class="menubutton"><a href="#">Trading</a></div>
             <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
-            <div class="menubutton"><div class="active"><a href="CreateStrategy.html">Create Strategy</a></div></div>
-            <div class="menubutton"><a href="News.html">News</a></div>
+            <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
+            <div class="menubutton"><div class="active"><a href="News.html">News</a></div></div>
             <div class="menubutton"><a href="About.html">About</a></div>
         </div>
 
@@ -44,43 +44,15 @@
     </div>
 </header>
 
-<div class="container">
-    <h1>Create Your Trading Strategy</h1>
+<div class="container" >
+    <h1>Market News</h1>
 
-    <form id="strategyForm">
-        <div class="form-group">
-            <label for="strategyName">Strategy Name:</label>
-            <input type="text" id="strategyName" name="strategyName" required>
-        </div>
-
-        <div class="form-group">
-            <label for="indicators">Select Indicators:</label>
-            <select id="indicators" name="indicators">
-                <option value="SMA">Simple Moving Average (SMA)</option>
-                <option value="EMA">Exponential Moving Average (EMA)</option>
-                <option value="MACD">Moving Average Convergence Divergence (MACD)</option>
-                <option value="RSI">Relative Strength Index (RSI)</option>
-                <option value="BollingerBands">Bollinger Bands</option>
-                <option value="StochasticOscillator">Stochastic Oscillator</option>
-            </select>
-            <button type="button" id="addIndicatorButton">Add Indicator</button>
-        </div>
-
-        <ul class="indicator-list" id="indicatorList"></ul>
-
-        <div class="form-group">
-            <label for="description">Strategy Description:</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <button type="submit">Create Strategy</button>
-        </div>
-    </form>
+    <div id="economicCalendarWidget"></div>
+    <script async type="text/javascript" data-type="calendar-widget" src="https://www.tradays.com/c/js/widgets/calendar/widget.js?v=13">
+        {"width":"100%","height":"500px","mode":"2","theme":1}
+    </script>
 </div>
 
 <script src="Responsive.js"></script>
-<script src="TemplateMaker.js"></script>
-
 </body>
 </html>

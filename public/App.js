@@ -9,14 +9,14 @@ socket.onopen = () => {
 };
 
 socket.onmessage = (event) => {
-    console.log('Data received from server:', event.data);
+    // console.log('Data received from server:', event.data);
     const data = JSON.parse(event.data);
 
     currencyPairs.forEach(symbol => {
         const askElement = document.getElementById(`${symbol.toLowerCase()}-ask`);
         const bidElement = document.getElementById(`${symbol.toLowerCase()}-bid`);
 
-        console.log(`Updating prices for ${symbol}:`, data[symbol]);
+        // console.log(`Updating prices for ${symbol}:`, data[symbol]);
 
         updatePriceElement(askElement, data[symbol].ask, symbol, 'ask');
         updatePriceElement(bidElement, data[symbol].bid, symbol, 'bid');
@@ -29,7 +29,7 @@ socket.onclose = () => {
 
 function updatePriceElement(element, newPrice, symbol, type) {
     if (!element) { // Check if the element exists
-        console.error(`Element not found for ${symbol}-${type}`);
+        // console.error(`Element not found for ${symbol}-${type}`);
         return;
     }
 
@@ -49,18 +49,3 @@ function updatePriceElement(element, newPrice, symbol, type) {
 
     previousPrices[`${symbol}-${type}`] = newPrice;
 }
-
-$('.menubutton a').on('click', function (e) {
-
-    e.preventDefault();
-
-    $(this).parent().addClass('active');
-    $(this).parent().siblings().removeClass('active');
-
-    target = $(this).attr('href');
-
-    // $('.tab-content > div').not(target).hide();
-
-    $(target).fadeIn(600);
-
-});
