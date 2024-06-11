@@ -40,7 +40,22 @@ document.getElementById('strategyForm').addEventListener('submit', function(even
     const indicators = Array.from(document.getElementById('indicatorList').children).map(li => li.firstChild.textContent);
     const description = document.getElementById('description').value;
 
-    const tplContent = generateTplContent(indicators);
+    const strategyDetails = {
+        id: '133603774023127622', // Example ID, generate or fetch as needed
+        symbol: 'EURUSD',
+        description: description,
+        period_type: 1,
+        period_size: 1,
+        digits: 5,
+        tick_size: 0.000000,
+        position_time: new Date().getTime() / 1000 | 0, // Current timestamp in seconds
+        scale_fix: 0,
+        scale_fixed_min: 1.0786,
+        scale_fixed_max: 1.0893,
+        windowHeight: 100 // Default height; adjust based on UI or requirements
+    };
+
+    const tplContent = generateTplContent(indicators, strategyDetails);
 
     downloadTplFile(`${strategyName}.tpl`, tplContent);
 
@@ -49,7 +64,7 @@ document.getElementById('strategyForm').addEventListener('submit', function(even
     console.log('Description:', description);
 });
 
-function generateTplContent(indicators) {
+function generateTplContent(indicators, strategyDetails) {
     const indicatorTemplates = {
         'SMA': `<indicator>
 name=Simple Moving Average
@@ -64,7 +79,10 @@ scale_fix_min=0
 scale_fix_min_val=0.000000
 scale_fix_max=0
 scale_fix_max_val=0.000000
+expertmode=0
+fixed_height=-1
 </indicator>`,
+
         'EMA': `<indicator>
 name=Exponential Moving Average
 path=
@@ -78,7 +96,10 @@ scale_fix_min=0
 scale_fix_min_val=0.000000
 scale_fix_max=0
 scale_fix_max_val=0.000000
+expertmode=0
+fixed_height=-1
 </indicator>`,
+
         'MACD': `<indicator>
 name=Moving Average Convergence Divergence
 path=
@@ -92,6 +113,8 @@ scale_fix_min=0
 scale_fix_min_val=0.000000
 scale_fix_max=0
 scale_fix_max_val=0.000000
+expertmode=0
+fixed_height=-1
 <graph>
 name=
 draw=1
@@ -100,9 +123,10 @@ width=1
 arrow=0
 shift=0
 shift_y=0
-color=255,
+color=255
 </graph>
 </indicator>`,
+
         'RSI': `<indicator>
 name=Relative Strength Index
 path=
@@ -116,6 +140,8 @@ scale_fix_min=1
 scale_fix_min_val=0.000000
 scale_fix_max=1
 scale_fix_max_val=100.000000
+expertmode=0
+fixed_height=-1
 <graph>
 name=
 draw=1
@@ -124,7 +150,7 @@ width=1
 arrow=0
 shift=0
 shift_y=0
-color=65280,
+color=65280
 </graph>
 <level>
 level=30.000000
@@ -142,7 +168,8 @@ descr=
 </level>
 period=14
 </indicator>`,
-        'BollingerBands': `<indicator>
+
+        'Bollinger Bands': `<indicator>
 name=Bollinger Bands
 path=
 apply=1
@@ -155,41 +182,43 @@ scale_fix_min=0
 scale_fix_min_val=0.000000
 scale_fix_max=0
 scale_fix_max_val=0.000000
+expertmode=0
+fixed_height=-1
 <graph>
 name=
-draw=1
+draw=131
 style=0
 width=1
 arrow=0
 shift=0
 shift_y=0
-color=255,
+color=255
 </graph>
 <graph>
 name=
-draw=1
+draw=131
 style=0
 width=1
 arrow=0
 shift=0
 shift_y=0
-color=255,
+color=255
 </graph>
 <graph>
 name=
-draw=1
+draw=131
 style=0
 width=1
 arrow=0
 shift=0
 shift_y=0
-color=255,
+color=255
 </graph>
 period=20
-deviation=2
-shift=0
+deviation=2.000000
 </indicator>`,
-        'StochasticOscillator': `<indicator>
+
+        'Stochastic Oscillator': `<indicator>
 name=Stochastic Oscillator
 path=
 apply=0
@@ -202,25 +231,21 @@ scale_fix_min=1
 scale_fix_min_val=0.000000
 scale_fix_max=1
 scale_fix_max_val=100.000000
+expertmode=0
+fixed_height=-1
 <graph>
 name=
 draw=1
 style=0
 width=1
-arrow=0
-shift=0
-shift_y=0
-color=3329330,
+color=3329330
 </graph>
 <graph>
 name=
 draw=1
 style=2
 width=1
-arrow=0
-shift=0
-shift_y=0
-color=255,
+color=255
 </graph>
 <level>
 level=20.000000
@@ -242,60 +267,37 @@ slowing=3
 price_apply=0
 method=0
 </indicator>`
+        // More indicators can be added here following the same pattern.
     };
 
-    return `<chart>
-id=128968182740683593
-symbol=USDJPY
-period_type=1
-period_size=1
-digits=2
-tick_size=0.000000
-position_time=0
-scale_fix=0
-scale_fixed_min=91.800000
-scale_fixed_max=95.200000
-scale_fix11=0
-scale_bar=0
-scale_bar_val=1.000000
-scale=4
-mode=1
-fore=0
-grid=1
-volume=0
-scroll=1
-shift=0
-shift_size=20.000000
-fixed_pos=0.000000
-ohlc=0
-bidline=1
-askline=0
-lastline=0
-days=1
-descriptions=0
-window_left=0
-window_top=0
-window_right=0
-window_bottom=0
-window_type=1
-background_color=0
-foreground_color=16777215
-barup_color=65280
-bardown_color=65280
-bullcandle_color=0
-bearcandle_color=16777215
-chartline_color=65280
-volumes_color=3329330
-grid_color=10061943
-bidline_color=10061943
-askline_color=255
-lastline_color=49152
-stops_color=255
+    // Handle cases where the indicator might not be defined
+    const indicatorXML = indicators.map(indicatorName => {
+        if (indicatorTemplates[indicatorName]) {
+            return `<window>
+height=${strategyDetails.windowHeight}
+objects=0
+${indicatorTemplates[indicatorName]}
+</window>`;
+        } else {
+            console.error(`No template found for indicator: ${indicatorName}`);
+            return ''; // or handle differently if necessary
+        }
+    }).join('');
 
-<window>
-height=100
-${indicators.map(indicator => indicatorTemplates[indicator]).join('')}
-</window>
+    return `<chart>
+id=${strategyDetails.id}
+symbol=${strategyDetails.symbol}
+description=${strategyDetails.description}
+period_type=${strategyDetails.period_type}
+period_size=${strategyDetails.period_size}
+digits=${strategyDetails.digits}
+tick_size=${strategyDetails.tick_size}
+position_time=${strategyDetails.position_time}
+scale_fix=${strategyDetails.scale_fix}
+scale_fixed_min=${strategyDetails.scale_fixed_min}
+scale_fixed_max=${strategyDetails.scale_fixed_max}
+windows_total=${indicators.length}
+${indicatorXML}
 </chart>`;
 }
 

@@ -8,69 +8,6 @@ const port = 3000;
 // Serve static files from the public directory
 app.use(express.static('public'));
 
-// const currencyPairs = ['EURUSD', 'GBPUSD', 'USDCHF', 'USDJPY', 'AUDUSD', 'NZDUSD', 'USDCAD'];
-// let forexData = {};
-//
-// // Initialize forexData with loading state
-// currencyPairs.forEach(symbol => {
-//     forexData[symbol] = { ask: 'Loading...', bid: 'Loading...' };
-// });
-//
-// // Function to get quotes from a server
-// function getQuoteFromServer(symbol) {
-//     const client_cmd = new Net.Socket();
-//
-//     client_cmd.connect(77, 'localhost', function () {
-//         const JSONobj = { MSG: 'QUOTE', SYMBOL: symbol };
-//         client_cmd.write(JSON.stringify(JSONobj) + '\r\n');
-//     });
-//
-//     client_cmd.on('data', function (chunk) {
-//         try {
-//             const JSONresult = JSON.parse(chunk.toString());
-//             forexData[symbol].ask = JSONresult['ASK'];
-//             forexData[symbol].bid = JSONresult['BID'];
-//         } catch (error) {
-//             forexData[symbol].ask = 'Error';
-//             forexData[symbol].bid = 'Error';
-//         }
-//         client_cmd.end();
-//     });
-//
-//     client_cmd.on('error', (err) => {
-//         forexData[symbol].ask = 'Error';
-//         forexData[symbol].bid = 'Error';
-//     });
-// }
-//
-// // Update quotes periodically
-// function updateQuotes() {
-//     currencyPairs.forEach(symbol => {
-//         getQuoteFromServer(symbol);
-//     });
-// }
-//
-// // Initial call and setting an interval to update quotes every 5 seconds
-// updateQuotes();
-// setInterval(updateQuotes, 5000);
-//
-// // WebSocket server on port 8080
-// const wss = new WebSocket.Server({ port: 8080 });
-//
-// wss.on('connection', (ws) => {
-//     console.log('New WebSocket client connected');
-//     ws.send(JSON.stringify(forexData));
-//
-//     const interval = setInterval(() => {
-//         ws.send(JSON.stringify(forexData));
-//     }, 5000);
-//
-//     ws.on('close', () => {
-//         clearInterval(interval);
-//     });
-// });
-
-
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 
