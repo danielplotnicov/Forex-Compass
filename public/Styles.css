@@ -14,46 +14,24 @@ body {
 
     margin: 20px auto;
     padding: 20px;
-    background-color: #282828; /* Slightly lighter background for content */
+    background-color: #282828;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    overflow: hidden; /* Ensures content does not overflow the container */
+    overflow: hidden;
 }
 
 h1 {
     text-align: center;
-    color: #ffffff; /* White heading */
+    color: #ffffff;
     margin-bottom: 20px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #444444; /* Dark table borders */
-}
-
-th {
-    background-color: #333333; /* Darker header */
-    font-weight: 600;
-}
-
-/* Alternate row colors */
-tbody tr:nth-child(even) {
-    background-color: #202020;
 }
 
 .navbar {
     width: 100%;
     overflow: hidden;
     font-size: 18px;
-    background-color: #333333; /* Dark background for menu */
+    background-color: #333333;
     margin: 0 auto;
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
@@ -101,15 +79,15 @@ tbody tr:nth-child(even) {
 }
 
 .menubutton a {
-    display: block; /* Make the anchor tag occupy the full space of its parent */
-    height: 100%; /* Make the anchor tag the same height as its parent */
+    display: block;
+    height: 100%;
     text-decoration:none;
     text-align: center;
     vertical-align: center;
     padding: 20px;
-    color: #e0e0e0; /* Light text for menu links */
+    color: #e0e0e0;
     font-weight: 500;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    transition: color 0.3s ease;
     vertical-align: middle;
     &:hover {
         color: white;
@@ -124,15 +102,23 @@ tbody tr:nth-child(even) {
     border-radius: 4px;
 }
 
+.menubutton{
+    transition: transform 0.3s ease;
+}
+
+.menubutton:hover {
+    transform: scale(1.1);
+}
+
 .logobutton a {
-    display: block; /* Make the anchor tag occupy the full space of its parent */
-    height: 100%; /* Make the anchor tag the same height as its parent */
+    display: block;
+    height: 100%;
     text-decoration:none;
     text-align: center;
     padding: 5px;
-    color: #e0e0e0; /* Light text for menu links */
+    color: #e0e0e0;
     font-weight: 500;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    transition: color 0.3s ease;
     &:hover {
         color: white;
         background: var(--main);
@@ -324,18 +310,13 @@ textarea {
 }
 
 .button {
-    border: 0;
-    outline: none;
-    border-radius: 0;
-    padding: 15px 0;
-    font-size: 2rem;
-    font-weight: var(--bold);
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    background: var(--main);
-    color: var(--white);
-    transition: all .5s ease;
-    -webkit-appearance: none;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: var(--main);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 .button:hover, .button:focus {
     background: var(--main-dark);
@@ -343,6 +324,37 @@ textarea {
 .button-block {
     display: block;
     width: 100%;
+}
+
+.downloadButton {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: var(--main);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.downloadButton:hover, .deleteButton:focus {
+    background: var(--main-dark);
+}
+
+.forgot {
+    margin-top: -20px;
+    text-align: right;
+}
+
+.deleteButton {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #9a1111;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.deleteButton:hover, .deleteButton:focus {
+    background: #730d0d;
 }
 
 .forgot {
@@ -362,16 +374,16 @@ textarea {
 
 .create-strategy-button {
     margin: 20px 0;
-    display: block; /* Make the anchor tag occupy the full space of its parent */
-    height: 100%; /* Make the anchor tag the same height as its parent */
-    line-height: 50px; /* Center the text vertically */
+    display: block;
+    height: 100%;
+    line-height: 50px;
     text-decoration:none;
     text-align: center;
     padding: 0 20px;
-    color: #e0e0e0; /* Light text for menu links */
+    color: #e0e0e0;
     font-weight: 500;
     font-size: 36px;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    transition: color 0.3s ease;
     &:hover {
         color: #ffffff;
         background: #202020;
@@ -387,10 +399,10 @@ textarea {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
-    color: #e0e0e0; /* Light text */
-    font-size: 1rem; /* Ensure a readable font size */
-    line-height: 1.2; /* Adjust line-height for better spacing */
-    padding-left: 5px; /* Optional: Add padding for better visual alignment */
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.2;
+    padding-left: 5px;
 }
 
 .form-group input,
@@ -401,8 +413,8 @@ textarea {
     border: 1px solid #444444;
     border-radius: 5px;
     background-color: #202020;
-    color: #e0e0e0; /* Light text */
-    box-sizing: border-box; /* Ensures padding and border are included in element's total width and height */
+    color: #e0e0e0;
+    box-sizing: border-box;
 }
 .form-group button {
     margin: 10px 0;
@@ -431,20 +443,14 @@ textarea {
 }
 
 
-
-/*Learn*/
 .indicator {
     background: var(--main-light);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px 0;
-    padding: 20px;
+    padding: 0;
     width: 100%;
-}
-
-.indicator h2 {
-    color: var(--form-bg);
-    margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .indicator h3 {
@@ -457,3 +463,39 @@ textarea {
     line-height: 1.6;
 }
 
+.indicator-header {
+    padding: 10px;
+    cursor: pointer;
+    color: var(--form-bg);
+    font-size: 28px;
+    display: block;
+}
+
+.indicator-content {
+    padding: 0 20px;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+    color: var(--form-bg);
+}
+
+.indicator-content img {
+    display: block;
+    width: 50%;
+    height: auto;
+    margin: 0 auto 15px;
+    transition: transform 0.3s ease;
+}
+
+.indicator-header:hover {
+    background-color: var(--main-dark);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #e0e0e0;
+}
+
+.indicator.active .indicator-content {
+    height: auto;
+    transition: height 0.3s ease-in;
+}

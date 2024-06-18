@@ -1,22 +1,29 @@
+// Create a set to track added indicators
 const addedIndicators = new Set();
 
+// Add an event listener to the "Add Indicator" button
 document.getElementById('addIndicatorButton').addEventListener('click', function() {
-    const indicatorsSelect = document.getElementById('indicators');
-    const selectedIndicator = indicatorsSelect.options[indicatorsSelect.selectedIndex].text;
-    const indicatorList = document.getElementById('indicatorList');
+    const indicatorsSelect = document.getElementById('indicators');  // Get the indicators dropdown
+    const selectedIndicator = indicatorsSelect.options[indicatorsSelect.selectedIndex].text;  // Get the selected indicator
+    const indicatorList = document.getElementById('indicatorList');  // Get the list element to display added indicators
 
+    // Check if the indicator has already been added
     if (addedIndicators.has(selectedIndicator)) {
         alert('This indicator has already been added.');
         return;
     }
 
+    // Add the selected indicator to the set
     addedIndicators.add(selectedIndicator);
 
+    // Create a new list item element
     const li = document.createElement('li');
     li.textContent = selectedIndicator;
 
+    // Create a remove button for the list item
     const removeButton = document.createElement('button');
     removeButton.textContent = 'Remove';
+    // Set styles for the remove button
     removeButton.style.backgroundColor = '#dc3545';
     removeButton.style.color = '#fff';
     removeButton.style.border = 'none';
@@ -24,50 +31,88 @@ document.getElementById('addIndicatorButton').addEventListener('click', function
     removeButton.style.padding = '5px 10px';
     removeButton.style.cursor = 'pointer';
     removeButton.style.marginLeft = '10px';
+
+    // Add an event listener to the remove button to handle removal of the indicator
     removeButton.addEventListener('click', function() {
         indicatorList.removeChild(li);
         addedIndicators.delete(selectedIndicator);
     });
 
+    // Append the remove button to the list item and the list item to the list
     li.appendChild(removeButton);
     indicatorList.appendChild(li);
 });
 
+// Add an event listener to the form submission
 document.getElementById('strategyForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault();  // Prevent the default form submission behavior
 
+    // Get the form input values
     const strategyName = document.getElementById('strategyName').value;
     const indicators = Array.from(document.getElementById('indicatorList').children).map(li => li.firstChild.textContent);
     const description = document.getElementById('description').value;
 
+    // Define the strategy details
     const strategyDetails = {
-        id: '133603774023127622', // Example ID, generate or fetch as needed
+        id: '133603774023127622',  // Example ID, generate or fetch as needed
         symbol: 'EURUSD',
         description: description,
         period_type: 1,
         period_size: 1,
         digits: 5,
         tick_size: 0.000000,
-        position_time: new Date().getTime() / 1000 | 0, // Current timestamp in seconds
+        position_time: new Date().getTime() / 1000 | 0,  // Current timestamp in seconds
         scale_fix: 0,
         scale_fixed_min: 1.0786,
         scale_fixed_max: 1.0893,
-        windowHeight: 100 // Default height; adjust based on UI or requirements
+        windowHeight: 100  // Default height; adjust based on UI or requirements
     };
 
+    // Generate the template content using the selected indicators and strategy details
     const tplContent = generateTplContent(indicators, strategyDetails);
 
-    downloadTplFile(`${strategyName}.tpl`, tplContent);
+    // Send a POST request to save the template
+    fetch('/save-template', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ strategyName, templateContent: tplContent })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.templateId) {
+                alert('Template saved successfully!');
 
-    console.log('Strategy Name:', strategyName);
-    console.log('Selected Indicators:', indicators);
-    console.log('Description:', description);
+                // Download the template file
+                const blob = new Blob([tplContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${strategyName}.tpl`;
+                a.click();
+                URL.revokeObjectURL(url);
+
+                // Reload templates to update the profile page
+                window.loadTemplates();
+            } else {
+                alert('Error saving template');
+            }
+        })
+        .catch(error => console.error('Error:', error));
 });
 
+// Function to generate the template content
 function generateTplContent(indicators, strategyDetails) {
+    // Predefined templates for different indicators
     const indicatorTemplates = {
-        'SMA': `<indicator>
-name=Simple Moving Average
+        'Simple Moving Average (SMA)': `<indicator>
+name=Moving Average
 path=
 apply=1
 show_data=1
@@ -81,10 +126,20 @@ scale_fix_max=0
 scale_fix_max_val=0.000000
 expertmode=0
 fixed_height=-1
+
+<graph>
+name=
+draw=129
+style=0
+width=1
+color=255
+</graph>
+period=10
+method=0
 </indicator>`,
 
-        'EMA': `<indicator>
-name=Exponential Moving Average
+        'Exponential Moving Average (EMA)': `<indicator>
+name=Double Exponential Moving Average
 path=
 apply=1
 show_data=1
@@ -98,10 +153,19 @@ scale_fix_max=0
 scale_fix_max_val=0.000000
 expertmode=0
 fixed_height=-1
+
+<graph>
+name=
+draw=129
+style=0
+width=1
+color=255
+</graph>
+period=14
 </indicator>`,
 
-        'MACD': `<indicator>
-name=Moving Average Convergence Divergence
+        'Moving Average Convergence Divergence (MACD)': `<indicator>
+name=MACD
 path=
 apply=1
 show_data=1
@@ -110,24 +174,33 @@ scale_line=0
 scale_line_percent=50
 scale_line_value=0.000000
 scale_fix_min=0
-scale_fix_min_val=0.000000
+scale_fix_min_val=-0.002818
 scale_fix_max=0
-scale_fix_max_val=0.000000
+scale_fix_max_val=0.003037
 expertmode=0
 fixed_height=-1
+
+<graph>
+name=
+draw=2
+style=0
+width=1
+color=12632256
+</graph>
+
 <graph>
 name=
 draw=1
-style=0
+style=2
 width=1
-arrow=0
-shift=0
-shift_y=0
 color=255
 </graph>
+fast_ema=12
+slow_ema=26
+macd_sma=9
 </indicator>`,
 
-        'RSI': `<indicator>
+        'Relative Strength Index (RSI)': `<indicator>
 name=Relative Strength Index
 path=
 apply=1
@@ -142,16 +215,15 @@ scale_fix_max=1
 scale_fix_max_val=100.000000
 expertmode=0
 fixed_height=-1
+
 <graph>
 name=
 draw=1
 style=0
 width=1
-arrow=0
-shift=0
-shift_y=0
-color=65280
+color=16748574
 </graph>
+
 <level>
 level=30.000000
 style=2
@@ -159,6 +231,7 @@ color=12632256
 width=1
 descr=
 </level>
+
 <level>
 level=70.000000
 style=2
@@ -184,6 +257,7 @@ scale_fix_max=0
 scale_fix_max_val=0.000000
 expertmode=0
 fixed_height=-1
+
 <graph>
 name=
 draw=131
@@ -194,6 +268,7 @@ shift=0
 shift_y=0
 color=255
 </graph>
+
 <graph>
 name=
 draw=131
@@ -204,6 +279,7 @@ shift=0
 shift_y=0
 color=255
 </graph>
+
 <graph>
 name=
 draw=131
@@ -233,6 +309,7 @@ scale_fix_max=1
 scale_fix_max_val=100.000000
 expertmode=0
 fixed_height=-1
+
 <graph>
 name=
 draw=1
@@ -240,6 +317,7 @@ style=0
 width=1
 color=3329330
 </graph>
+
 <graph>
 name=
 draw=1
@@ -247,6 +325,7 @@ style=2
 width=1
 color=255
 </graph>
+
 <level>
 level=20.000000
 style=2
@@ -254,6 +333,7 @@ color=12632256
 width=1
 descr=
 </level>
+
 <level>
 level=80.000000
 style=2
@@ -267,12 +347,13 @@ slowing=3
 price_apply=0
 method=0
 </indicator>`
-        // More indicators can be added here following the same pattern.
     };
 
-    // Handle cases where the indicator might not be defined
+    // Generate XML for each selected indicator using its template
     const indicatorXML = indicators.map(indicatorName => {
+        console.log(`Processing indicator: ${indicatorName}`);
         if (indicatorTemplates[indicatorName]) {
+            console.log(`Found template for indicator: ${indicatorName}`);
             return `<window>
 height=${strategyDetails.windowHeight}
 objects=0
@@ -284,7 +365,10 @@ ${indicatorTemplates[indicatorName]}
         }
     }).join('');
 
-    return `<chart>
+    console.log('Indicator XML:', indicatorXML);
+
+    // Generate the complete template content with all the indicators and strategy details
+    const tplContent = `<chart>
 id=${strategyDetails.id}
 symbol=${strategyDetails.symbol}
 description=${strategyDetails.description}
@@ -299,14 +383,8 @@ scale_fixed_max=${strategyDetails.scale_fixed_max}
 windows_total=${indicators.length}
 ${indicatorXML}
 </chart>`;
-}
 
-function downloadTplFile(filename, content) {
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(url);
+    console.log('Generated TPL Content:', tplContent);
+
+    return tplContent;
 }

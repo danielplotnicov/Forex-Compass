@@ -13,7 +13,6 @@
     <nav class="navbar" id="myNavbar">
         <div class="logobutton"><a href="index.html"><img src="/Images/LogoTransparent.png" alt="Home" width="64" height="64"></a></div>
         <div class="menu">
-            <div class="menubutton"><a href="#">Trading</a></div>
             <div class="menubutton"><div class="active"><a href="Analytics.html">Analytics</a></div></div>
             <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
             <div class="menubutton"><a href="News.html">News</a></div>
@@ -29,7 +28,6 @@
     </nav>
 
     <div class="dropdown_menu">
-        <div class="menubutton"><a href="#">Trading</a></div>
         <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
         <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
         <div class="menubutton"><a href="News.html">News</a></div>
@@ -42,60 +40,112 @@
 
 <div class="container">
     <h1>Learn MetaTrader Indicators</h1>
+
     <div class="indicator">
-        <h2>Moving Average (MA)</h2>
-        <p>The Moving Average (MA) is a widely used indicator in technical analysis that helps smooth out price data by creating a constantly updated average price. The two main types of moving averages are the Simple Moving Average (SMA) and the Exponential Moving Average (EMA).</p>
-        <h3>Calculation:</h3>
-        <p><b>SMA:</b> The simple moving average is calculated by adding the prices over a certain period and then dividing by the number of periods.</p>
-        <p><b>EMA:</b> The exponential moving average gives more weight to recent prices, making it more responsive to new information.</p>
-        <h3>Usage:</h3>
-        <p>Moving averages are used to identify the direction of the trend and to determine support and resistance levels. They are also used to generate trading signals when different moving averages cross each other.</p>
+        <div class="indicator-header">
+            Moving Average (MA)
+        </div>
+        <div class="indicator-content">
+            <img src="/Images/MA.png" alt="MA">
+            <p>The Moving Average (MA) is a widely used indicator in technical analysis that helps smooth out price data by creating a constantly updated average price. The two main types of moving averages are the Simple Moving Average (SMA) and the Exponential Moving Average (EMA).</p>
+            <h3>Calculation:</h3>
+            <p><b>SMA:</b> The simple moving average is calculated by adding the prices over a certain period and then dividing by the number of periods.</p>
+            <p><b>EMA:</b> The exponential moving average gives more weight to recent prices, making it more responsive to new information.</p>
+            <h3>Usage:</h3>
+            <p>Moving averages are used to identify the direction of the trend and to determine support and resistance levels. They are also used to generate trading signals when different moving averages cross each other.</p>
+        </div>
     </div>
 
     <div class="indicator">
-        <h2>Relative Strength Index (RSI)</h2>
-        <p>The Relative Strength Index (RSI) is a momentum oscillator that measures the speed and change of price movements. It oscillates between 0 and 100.</p>
-        <h3>Calculation:</h3>
-        <p>RSI is calculated using the formula: RSI = 100 - (100 / (1 + RS)), where RS (Relative Strength) is the average of 'X' days' up closes divided by the average of 'X' days' down closes.</p>
-        <h3>Usage:</h3>
-        <p>The RSI is used to identify overbought or oversold conditions in a market. Typically, an RSI above 70 indicates overbought conditions, while an RSI below 30 indicates oversold conditions.</p>
+        <div class="indicator-header">
+            Relative Strength Index (RSI)
+        </div>
+        <div class="indicator-content">
+            <img src="/Images/RSI.png" alt="RSI">
+            <p>The Relative Strength Index (RSI) is a momentum oscillator that measures the speed and change of price movements. It oscillates between 0 and 100.</p>
+            <h3>Calculation:</h3>
+            <p>RSI is calculated using the formula: RSI = 100 - (100 / (1 + RS)), where RS (Relative Strength) is the average of 'X' days' up closes divided by the average of 'X' days' down closes.</p>
+            <h3>Usage:</h3>
+            <p>The RSI is used to identify overbought or oversold conditions in a market. Typically, an RSI above 70 indicates overbought conditions, while an RSI below 30 indicates oversold conditions.</p>
+        </div>
     </div>
 
     <div class="indicator">
-        <h2>Moving Average Convergence Divergence (MACD)</h2>
-        <p>The Moving Average Convergence Divergence (MACD) is a trend-following momentum indicator that shows the relationship between two moving averages of a security’s price.</p>
-        <h3>Calculation:</h3>
-        <p>MACD is calculated by subtracting the 26-period EMA from the 12-period EMA. A nine-day EMA of the MACD called the "signal line" is then plotted on top of the MACD line, which can act as a trigger for buy and sell signals.</p>
-        <h3>Usage:</h3>
-        <p>Traders use the MACD to identify changes in the direction, strength, momentum, and duration of a trend. The MACD is also used to spot potential buy and sell signals when the MACD line crosses above or below the signal line.</p>
+        <div class="indicator-header">
+            Moving Average Convergence Divergence (MACD)
+        </div>
+        <div class="indicator-content">
+            <img src="/Images/MACD.png" alt="MACD">
+            <p>The Moving Average Convergence Divergence (MACD) is a trend-following momentum indicator that shows the relationship between two moving averages of a security’s price.</p>
+            <h3>Calculation:</h3>
+            <p>MACD is calculated by subtracting the 26-period EMA from the 12-period EMA. A nine-day EMA of the MACD called the "signal line" is then plotted on top of the MACD line, which can act as a trigger for buy and sell signals.</p>
+            <h3>Usage:</h3>
+            <p>Traders use the MACD to identify changes in the direction, strength, momentum, and duration of a trend. The MACD is also used to spot potential buy and sell signals when the MACD line crosses above or below the signal line.</p>
+        </div>
     </div>
 
     <div class="indicator">
-        <h2>Bollinger Bands</h2>
-        <p>Bollinger Bands are volatility bands placed above and below a moving average. Volatility is based on the standard deviation, which changes as volatility increases and decreases.</p>
-        <h3>Calculation:</h3>
-        <p>Bollinger Bands consist of three lines: the middle band (a moving average), the upper band (the middle band plus two standard deviations), and the lower band (the middle band minus two standard deviations).</p>
-        <h3>Usage:</h3>
-        <p>Bollinger Bands are used to identify overbought and oversold conditions. When prices move closer to the upper band, the market is considered overbought, and when they move closer to the lower band, it is considered oversold.</p>
+        <div class="indicator-header">
+            Bollinger Bands
+        </div>
+        <div class="indicator-content">
+            <img src="/Images/BB.png" alt="BB">
+            <p>Bollinger Bands are volatility bands placed above and below a moving average. Volatility is based on the standard deviation, which changes as volatility increases and decreases.</p>
+            <h3>Calculation:</h3>
+            <p>Bollinger Bands consist of three lines: the middle band (a moving average), the upper band (the middle band plus two standard deviations), and the lower band (the middle band minus two standard deviations).</p>
+            <h3>Usage:</h3>
+            <p>Bollinger Bands are used to identify overbought and oversold conditions. When prices move closer to the upper band, the market is considered overbought, and when they move closer to the lower band, it is considered oversold.</p>
+        </div>
     </div>
 
     <div class="indicator">
-        <h2>Stochastic Oscillator</h2>
-        <p>The Stochastic Oscillator is a momentum indicator comparing a particular closing price of a security to a range of its prices over a certain period of time.</p>
-        <h3>Calculation:</h3>
-        <p>The formula for the Stochastic Oscillator is: %K = (Current Close - Lowest Low) / (Highest High - Lowest Low) * 100. %D is the 3-day simple moving average of %K.</p>
-        <h3>Usage:</h3>
-        <p>The Stochastic Oscillator is used to generate overbought and oversold trading signals, with readings above 80 indicating overbought conditions and readings below 20 indicating oversold conditions.</p>
+        <div class="indicator-header">
+            Stochastic Oscillator
+        </div>
+        <div class="indicator-content">
+            <img src="/Images/SO.png" alt="SO">
+            <p>The Stochastic Oscillator is a momentum indicator comparing a particular closing price of a security to a range of its prices over a certain period of time.</p>
+            <h3>Calculation:</h3>
+            <p>The formula for the Stochastic Oscillator is: %K = (Current Close - Lowest Low) / (Highest High - Lowest Low) * 100. %D is the 3-day simple moving average of %K.</p>
+            <h3>Usage:</h3>
+            <p>The Stochastic Oscillator is used to generate overbought and oversold trading signals, with readings above 80 indicating overbought conditions and readings below 20 indicating oversold conditions.</p>
+        </div>
     </div>
 
     <div class="indicator">
-        <h2>Fibonacci Retracement</h2>
-        <p>Fibonacci retracement levels are horizontal lines that indicate where support and resistance are likely to occur. They are based on Fibonacci numbers.</p>
-        <h3>Calculation:</h3>
-        <p>Fibonacci retracement levels are calculated by taking two extreme points (usually a peak and a trough) on a chart and dividing the vertical distance by the key Fibonacci ratios of 23.6%, 38.2%, 50%, 61.8%, and 100%.</p>
-        <h3>Usage:</h3>
-        <p>Fibonacci retracement levels are used to determine potential support and resistance levels. Traders use these levels to predict the possible extent of a counter-trend move.</p>
+        <div class="indicator-header">
+            Fibonacci Retracement
+        </div>
+        <div class="indicator-content">
+            <img src="/Images/FR.png" alt="FR">
+            <p>Fibonacci retracement levels are horizontal lines that indicate where support and resistance are likely to occur. They are based on Fibonacci numbers.</p>
+            <h3>Calculation:</h3>
+            <p>Fibonacci retracement levels are calculated by taking two extreme points (usually a peak and a trough) on a chart and dividing the vertical distance by the key Fibonacci ratios of 23.6%, 38.2%, 50%, 61.8%, and 100%.</p>
+            <h3>Usage:</h3>
+            <p>Fibonacci retracement levels are used to determine potential support and resistance levels. Traders use these levels to predict the possible extent of a counter-trend move.</p>
+        </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const indicators = document.querySelectorAll('.indicator');
+        indicators.forEach(indicator => {
+            const header = indicator.querySelector('.indicator-header');
+            const content = indicator.querySelector('.indicator-content');
+            content.style.height = '0';
+            header.addEventListener('click', () => {
+                indicator.classList.toggle('active');
+                if (indicator.classList.contains('active')) {
+                    content.style.height = content.scrollHeight + 'px';
+                } else {
+                    content.style.height = '0';
+                }
+            });
+        });
+    });
+</script>
+<script src="ResponsiveMenu.js"></script>
+<script src="FirebaseApp.js"></script>
 </body>
 </html>

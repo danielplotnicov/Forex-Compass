@@ -14,7 +14,6 @@
         <div class="logobutton"><a href="index.html"><img src="/Images/LogoTransparent.png" alt="Home" width="64" height="64"></a></div>
 
         <div class="menu">
-            <div class="menubutton"><a href="#">Trading</a></div>
             <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
             <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
             <div class="menubutton"><a href="News.html">News</a></div>
@@ -29,7 +28,6 @@
         </div>
     </nav>
     <div class="dropdown_menu">
-        <div class="menubutton"><a href="#">Trading</a></div>
         <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
         <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
         <div class="menubutton"><a href="News.html">News</a></div>
@@ -42,11 +40,6 @@
 
 <div id="not-logged-in">
     <div class="container">
-        <div class="signInIcons">
-            <div class="logobutton"><a><i class="fab fa-google"  style="font-size: 48px"></i></a></div>
-            <div class="logobutton"><a><i class="fab fa-facebook" id="facebookSignIn" style="font-size: 48px"></i></a></div>
-            <div class="logobutton"><a><i class="fab fa-twitter" id="twitterSignIn" style="font-size: 48px"></i></a></div>
-        </div>
 
         <ul class="tab-group">
             <li class="tab active"><a href="#signup">Sign Up</a></li>
@@ -86,7 +79,7 @@
                         <label>Password<span class="req">*</span></label>
                         <input type="password" id="login-password" placeholder="Password" required autocomplete="off" />
                     </div>
-                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+<!--                    <p class="forgot"><a href="#">Forgot Password?</a></p>-->
                     <button type="submit" id="submitLogin" class="button button-block">Log In</button>
                 </form>
             </div>
@@ -96,26 +89,49 @@
 
 <div id="logged-in" style="display: none;">
     <div class="container">
-        <h1>Welcome Back, <span id="user-firstname"></span>!</h1>
-        <p><strong>Last Name:</strong> <span id="user-lastname"></span></p>
-        <p><strong>Email:</strong> <span id="user-email"></span></p>
-        <p><strong>Age:</strong> <input type="number" id="user-age" /></p>
-        <p><strong>Gender:</strong> <input type="text" id="user-gender" /></p>
-        <p><strong>Description:</strong> <textarea id="user-description"></textarea></p>
-        <p><strong>Photo URL:</strong> <input type="text" id="user-photo" /></p>
-        <button onclick="updateUserDetails()">Update Details</button>
+        <h1>Profile</h1>
+        <p><strong>Name:</strong>
+            <span id="user-firstname-display"></span>
+            <input type="text" id="user-firstname" style="display: none;" />
+            <span id="user-lastname-display"></span>
+            <input type="text" id="user-lastname" style="display: none;" />
+        </p>
+        <p><strong>Email:</strong>
+            <span id="user-email-display"></span>
+            <input type="email" id="user-email" style="display: none;" />
+        </p>
+        <p><strong>Age:</strong>
+            <span id="user-age-display"></span>
+            <input type="number" id="user-age" style="display: none;" />
+        </p>
+        <p><strong>Gender:</strong>
+            <span id="user-gender-display"></span>
+            <input type="text" id="user-gender" style="display: none;" />
+        </p>
+        <p><strong>Description:</strong>
+            <span id="user-description-display"></span>
+            <textarea id="user-description" style="display: none;"></textarea>
+        </p>
+        <p><strong>Photo URL:</strong>
+            <span id="user-photo-display"></span>
+            <input type="text" id="user-photo" style="display: none;" />
+        </p>
+
+        <button id="edit-user-details" class="button" onclick="editUserDetails()">Edit Profile</button>
+        <button id="save-user-details" class="button" onclick="saveUserDetails()" style="display: none;">Save Details</button>
+
+        <div id="strategy-templates">
+            <h3>Your Strategies</h3>
+            <ul id="template-list"></ul>
+        </div>
+
         <button id="submitLogOut" class="button button-block">Log Out</button>
     </div>
 </div>
 
-
-
-<!--<script src="https://www.gstatic.com/firebasejs/13.10.2/firebase-app.js"></script>-->
-<!--<script src="https://www.gstatic.com/firebasejs/13.10.2/firebase-auth.js"></script>-->
-<!--<script src="FirebaseApp.js"></script>-->
-<script src="Responsive.js"></script>
+<script src="TemplateMaker.js"></script>
+<script src="ResponsiveMenu.js"></script>
 <script src="LoginRegister.js"></script>
-<script src="App.js"></script>
-
+<script src="FirebaseApp.js"></script>
 </body>
 </html>
