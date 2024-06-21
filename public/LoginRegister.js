@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
             .then(response => response.json())
             .then(data => {
-                alert(data.message); // Alert the user with the response message
+                // alert(data.message); // Alert the user with the response message
                 if (data.id) { // Clear fields if registration is successful
                     clearFields();
                     // Automatically log in the user after registration
@@ -119,10 +119,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to update visibility based on login status
+    // Function to update visibility based on login status
     function updateVisibility() {
         fetch('/check-login')
             .then(response => response.json())
             .then(data => {
+                window.data = data; // Make the data object globally accessible
+
                 if (data.isLoggedIn) {
                     document.getElementById('logged-in').style.display = 'block';
                     document.getElementById('not-logged-in').style.display = 'none';
@@ -144,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => console.error('Error:', error));
     }
+
 
     // Function to load templates
     function loadTemplates() {
@@ -197,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.message) {
-                    alert(data.message); // Alert the user with the response message
+                    // alert(data.message); // Alert the user with the response message
                     loadTemplates(); // Reload templates after deletion
                 } else {
                     alert('Error deleting template');

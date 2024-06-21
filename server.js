@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 // Use express-session for managing sessions
 app.use(session({
-    secret: 'your_secret_key', // Use a secure random secret in production
+    secret: 'your_secret_key',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Set secure to true if using HTTPS

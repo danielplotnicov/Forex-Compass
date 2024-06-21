@@ -87,16 +87,7 @@ document.getElementById('strategyForm').addEventListener('submit', function(even
         })
         .then(data => {
             if (data.templateId) {
-                alert('Template saved successfully!');
-
-                // Download the template file
-                const blob = new Blob([tplContent], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `${strategyName}.tpl`;
-                a.click();
-                URL.revokeObjectURL(url);
+                // alert('Template saved successfully!');
 
                 // Reload templates to update the profile page
                 window.loadTemplates();
@@ -104,7 +95,17 @@ document.getElementById('strategyForm').addEventListener('submit', function(even
                 alert('Error saving template');
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error))
+        .finally(() => {
+            // Download the template file regardless of the save result
+            const blob = new Blob([tplContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${strategyName}.tpl`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
 });
 
 // Function to generate the template content
