@@ -28,15 +28,15 @@ ForexCompass is a web application for creating and managing trading strategies. 
 3. Starts the server in a new command prompt window.
 4. Waits 5 secondsfor the server to start and then opens the website in your default web browser.
 
-##Project Structure
+## Project Structure
 - server.js: The main server file.
 - public/: Contains the public-facing files, including HTML, CSS, and client-side JavaScript.
 - node_modules/: Contains all npm dependencies (created after running npm install).
 - mydatabase.db: SQLite database file.
 
-##Additional Information
+## Additional Information
 - The server listens on port 3000 by default. If you need to change the port, update the port variable in server.js.
 
-##Troubleshooting
+## Troubleshooting
 - If the website does not open, ensure that the server is running and that there are no errors in the command prompt window where the server is running.
 - If Node.js is not installing, check your internet connection and ensure that you have administrative privileges to install software on your machine.
