@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character set and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title of the web application -->
     <title>ForexCompass</title>
-    <link rel="stylesheet" href="Styles.css">
+
+    <!-- Linking CSS styles -->
+    <link rel="stylesheet" href="styles/Styles.css">
+
+    <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/55bc2bca78.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <header>
+    <!-- Navigation bar with logo and menu items -->
     <nav class="navbar" id="myNavbar">
+        <!-- Logo with a link to the homepage -->
         <div class="logobutton"><a href="index.html"><img src="/Images/LogoTransparent.png" alt="Home" width="64" height="64"></a></div>
 
+        <!-- Main menu items -->
         <div class="menu">
             <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
             <div class="menubutton"><div class="active"><a href="CreateStrategy.html">Create Strategy</a></div></div>
@@ -20,37 +30,42 @@
             <div class="menubutton"><a href="About.html">About</a></div>
         </div>
 
+        <!-- User login/register button -->
         <div class="menubutton">
             <a href="LoginRegister.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a>
         </div>
 
+        <!-- Menu toggle button for mobile view -->
         <div class="toggle_btn">
             <i class="fa-solid fa-bars"></i>
         </div>
     </nav>
 
+    <!-- Dropdown menu for mobile view -->
     <div class="dropdown_menu">
         <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
         <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
         <div class="menubutton"><a href="News.html">News</a></div>
         <div class="menubutton"><a href="About.html">About</a></div>
-
-
         <div class="menubutton">
             <a href="LoginRegister.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a>
         </div>
     </div>
 </header>
 
+<!-- Main container for the Create Strategy page content -->
 <div class="container">
     <h1>Create Your Indicator Template</h1>
 
+    <!-- Form for creating a new trading strategy -->
     <form id="strategyForm">
+        <!-- Input field for the strategy name -->
         <div class="form-group">
             <label for="strategyName">Strategy Name:</label>
             <input type="text" id="strategyName" name="strategyName" required>
         </div>
 
+        <!-- Dropdown to select indicators and button to add them to the list -->
         <div class="form-group">
             <label for="indicators">Select Indicators:</label>
             <select id="indicators" name="indicators">
@@ -64,22 +79,26 @@
             <button type="button" id="addIndicatorButton">Add Indicator</button>
         </div>
 
+        <!-- List to display selected indicators -->
         <ul class="indicator-list" id="indicatorList"></ul>
 
+        <!-- Text area for the strategy description -->
         <div class="form-group">
             <label for="description">Strategy Description:</label>
             <textarea id="description" name="description" rows="4" required></textarea>
         </div>
 
+        <!-- Submit button to create the strategy -->
         <div class="form-group">
             <button type="submit">Create Strategy</button>
         </div>
     </form>
 </div>
 
-<script src="ResponsiveMenu.js"></script>
-<script src="TemplateMaker.js"></script>
-<script src="LoginRegister.js"></script>
-<script src="FirebaseApp.js"></script>
+<!-- JavaScript for responsive menu, template creation, and Firebase integration -->
+<script src="scripts/ResponsiveMenu.js"></script>
+<script src="scripts/TemplateMaker.js"></script>
+<script src="scripts/LoginRegister.js"></script>
+<script src="scripts/FirebaseApp.js"></script>
 </body>
 </html>

@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character set and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title of the web application -->
     <title>ForexCompass</title>
-    <link rel="stylesheet" href="Styles.css">
+
+    <!-- Linking CSS styles -->
+    <link rel="stylesheet" href="styles/Styles.css">
+
+    <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/55bc2bca78.js" crossorigin="anonymous"></script>
+
+    <!-- Inline styles for hiding elements -->
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
 <header>
+    <!-- Navigation bar with logo and menu items -->
     <nav class="navbar" id="myNavbar">
+        <!-- Logo with a link to the homepage -->
         <div class="logobutton"><a href="index.html"><img src="/Images/LogoTransparent.png" alt="Home" width="64" height="64"></a></div>
 
+        <!-- Main menu items -->
         <div class="menu">
             <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
             <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
@@ -20,13 +37,18 @@
             <div class="menubutton"><a href="About.html">About</a></div>
         </div>
 
+        <!-- User login/register button -->
         <div class="menubutton">
             <div class="active"><a href="LoginRegister.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a></div>
         </div>
+
+        <!-- Menu toggle button for mobile view -->
         <div class="toggle_btn">
             <i class="fa-solid fa-bars"></i>
         </div>
     </nav>
+
+    <!-- Dropdown menu for mobile view -->
     <div class="dropdown_menu">
         <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
         <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
@@ -38,14 +60,18 @@
     </div>
 </header>
 
-<div id="not-logged-in">
+<!-- Container for not logged-in view -->
+<div id="not-logged-in" class="hidden">
     <div class="container">
-
+        <!-- Tab navigation for Sign Up and Log In -->
         <ul class="tab-group">
             <li class="tab active"><a href="#signup">Sign Up</a></li>
             <li class="tab"><a href="#login">Log In</a></li>
         </ul>
+
+        <!-- Tab content for Sign Up and Log In forms -->
         <div class="tab-content">
+            <!-- Sign Up form -->
             <div id="signup" class="active">
                 <form id="signup-form">
                     <div class="top-row">
@@ -69,6 +95,8 @@
                     <button type="submit" id="submitSignUp" class="button button-block">Sign Up</button>
                 </form>
             </div>
+
+            <!-- Log In form -->
             <div id="login">
                 <form id="login-form">
                     <div class="field-wrap">
@@ -79,7 +107,6 @@
                         <label>Password<span class="req">*</span></label>
                         <input type="password" id="login-password" placeholder="Password" required autocomplete="off" />
                     </div>
-<!--                    <p class="forgot"><a href="#">Forgot Password?</a></p>-->
                     <button type="submit" id="submitLogin" class="button button-block">Log In</button>
                 </form>
             </div>
@@ -87,9 +114,12 @@
     </div>
 </div>
 
-<div id="logged-in" style="display: none;">
+<!-- Container for logged-in view -->
+<div id="logged-in" class="hidden">
     <div class="container">
         <h1>Profile</h1>
+
+        <!-- Display and edit user details -->
         <p><strong>Name:</strong>
             <span id="user-firstname-display"></span>
             <input type="text" id="user-firstname" style="display: none;" />
@@ -117,21 +147,25 @@
             <input type="text" id="user-photo" style="display: none;" />
         </p>
 
+        <!-- Buttons for editing and saving user details -->
         <button id="edit-user-details" class="button" onclick="editUserDetails()">Edit Profile</button>
         <button id="save-user-details" class="button" onclick="saveUserDetails()" style="display: none;">Save Details</button>
 
+        <!-- Display user's strategies -->
         <div id="strategy-templates">
             <h3>Your Strategies</h3>
             <ul id="template-list"></ul>
         </div>
 
+        <!-- Button to log out -->
         <button id="submitLogOut" class="button button-block">Log Out</button>
     </div>
 </div>
 
-<script src="TemplateMaker.js"></script>
-<script src="ResponsiveMenu.js"></script>
-<script src="LoginRegister.js"></script>
-<script src="FirebaseApp.js"></script>
+<!-- JavaScript for template management, responsive menu, login/register functionality, and Firebase integration -->
+<script src="scripts/TemplateMaker.js"></script>
+<script src="scripts/ResponsiveMenu.js"></script>
+<script src="scripts/LoginRegister.js"></script>
+<script src="scripts/FirebaseApp.js"></script>
 </body>
 </html>

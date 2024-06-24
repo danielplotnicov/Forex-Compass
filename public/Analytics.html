@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character set and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title of the web application -->
     <title>ForexCompass</title>
-    <link rel="stylesheet" href="Styles.css">
+
+    <!-- Linking CSS styles -->
+    <link rel="stylesheet" href="styles/Styles.css">
+
+    <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/55bc2bca78.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <header>
+    <!-- Navigation bar with logo and menu items -->
     <nav class="navbar" id="myNavbar">
+        <!-- Logo with a link to the homepage -->
         <div class="logobutton"><a href="index.html"><img src="/Images/LogoTransparent.png" alt="Home" width="64" height="64"></a></div>
+
+        <!-- Main menu items -->
         <div class="menu">
             <div class="menubutton"><div class="active"><a href="Analytics.html">Analytics</a></div></div>
             <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
@@ -19,14 +30,18 @@
             <div class="menubutton"><a href="About.html">About</a></div>
         </div>
 
+        <!-- User login/register button -->
         <div class="menubutton">
             <a href="LoginRegister.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a>
         </div>
+
+        <!-- Menu toggle button for mobile view -->
         <div class="toggle_btn">
             <i class="fa-solid fa-bars"></i>
         </div>
     </nav>
 
+    <!-- Dropdown menu for mobile view -->
     <div class="dropdown_menu">
         <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
         <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
@@ -38,9 +53,11 @@
     </div>
 </header>
 
+<!-- Main container for the Learn MetaTrader Indicators page content -->
 <div class="container">
     <h1>Learn MetaTrader Indicators</h1>
 
+    <!-- Section for Moving Average (MA) indicator -->
     <div class="indicator">
         <div class="indicator-header">
             Moving Average (MA)
@@ -56,6 +73,7 @@
         </div>
     </div>
 
+    <!-- Section for Relative Strength Index (RSI) indicator -->
     <div class="indicator">
         <div class="indicator-header">
             Relative Strength Index (RSI)
@@ -70,6 +88,7 @@
         </div>
     </div>
 
+    <!-- Section for Moving Average Convergence Divergence (MACD) indicator -->
     <div class="indicator">
         <div class="indicator-header">
             Moving Average Convergence Divergence (MACD)
@@ -84,6 +103,7 @@
         </div>
     </div>
 
+    <!-- Section for Bollinger Bands indicator -->
     <div class="indicator">
         <div class="indicator-header">
             Bollinger Bands
@@ -98,6 +118,7 @@
         </div>
     </div>
 
+    <!-- Section for Stochastic Oscillator indicator -->
     <div class="indicator">
         <div class="indicator-header">
             Stochastic Oscillator
@@ -112,6 +133,7 @@
         </div>
     </div>
 
+    <!-- Section for Fibonacci Retracement indicator -->
     <div class="indicator">
         <div class="indicator-header">
             Fibonacci Retracement
@@ -127,6 +149,7 @@
     </div>
 </div>
 
+<!-- JavaScript to handle the toggling of indicator content sections -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const indicators = document.querySelectorAll('.indicator');
@@ -145,7 +168,9 @@
         });
     });
 </script>
-<script src="ResponsiveMenu.js"></script>
-<script src="FirebaseApp.js"></script>
+
+<!-- Scripts for responsive menu and Firebase initialization -->
+<script src="scripts/ResponsiveMenu.js"></script>
+<script src="scripts/FirebaseApp.js"></script>
 </body>
 </html>

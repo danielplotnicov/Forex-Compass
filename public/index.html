@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character set and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title of the web application -->
     <title>ForexCompass</title>
+
+    <!-- Favicon for the website -->
     <link rel="shortcut icon" type="image/jpg" href="/Images/LogoSolid.png"/>
-    <link rel="stylesheet" href="Styles.css">
+
+    <!-- Linking CSS styles -->
+    <link rel="stylesheet" href="styles/Styles.css">
+
+    <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/55bc2bca78.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
+    <!-- Navigation bar with logo and menu items -->
     <nav class="navbar" id="myNavbar">
+        <!-- Logo with a link to the homepage -->
         <div class="logobutton"><div class="active"><a href="index.html"><img src="/Images/LogoTransparent.png" alt="Home" width="64" height="64"></a></div></div>
+
+        <!-- Main menu items -->
         <div class="menu">
             <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
             <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
@@ -19,36 +32,42 @@
             <div class="menubutton"><a href="About.html">About</a></div>
         </div>
 
+        <!-- User login/register button -->
         <div class="menubutton">
             <a href="LoginRegister.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a>
         </div>
 
+        <!-- Menu toggle button for mobile view -->
         <div class="toggle_btn">
             <i class="fa-solid fa-bars"></i>
         </div>
     </nav>
 
+    <!-- Dropdown menu for mobile view -->
     <div class="dropdown_menu">
         <div class="menubutton"><a href="Analytics.html">Analytics</a></div>
         <div class="menubutton"><a href="CreateStrategy.html">Create Strategy</a></div>
         <div class="menubutton"><a href="News.html">News</a></div>
         <div class="menubutton"><a href="About.html">About</a></div>
-
-
         <div class="menubutton">
             <a href="LoginRegister.html"><i class="fa-solid fa-user" style="font-size: 48px"></i></a>
         </div>
     </div>
 </header>
+
+<!-- Main container for the Live Forex Rates page content -->
 <div class="container">
     <h1>Live Forex Rates</h1>
 
+    <!-- Embedding a widget for live forex rates -->
     <iframe src="https://fxpricing.com/fx-widget/market-currency-rates-widget.php?id=1,2,3,5,14,20,39,19,13,112,18&click_target=blank&theme=dark&tm-cr=212529&hr-cr=FFFFFF13&by-cr=28A745&sl-cr=DC3545&flags=circle&value_alignment=center&column=price,ask,bid,chg,chg_per,spread,time&lang=en&font=Verdana, Geneva, sans-serif" width="100%" height="503px" style="border: unset;"></iframe>
 
+    <!-- Button to navigate to the Create Strategy page -->
     <a href="CreateStrategy.html" class="create-strategy-button">Create strategy</a>
 </div>
 
-<script src="ResponsiveMenu.js"></script>
-<script src="FirebaseApp.js"></script>
+<!-- JavaScript for responsive menu and Firebase integration -->
+<script src="scripts/ResponsiveMenu.js"></script>
+<script src="scripts/FirebaseApp.js"></script>
 </body>
 </html>

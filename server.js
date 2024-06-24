@@ -5,19 +5,32 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
+// Function to generate a random string
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
+
+// Generate a simple random secret key
+const secretKey = generateRandomString(64);
+
+// Use express-session for managing sessions
+app.use(session({
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Set secure to true if using HTTPS
+}));
+
 // Serve static files from the public directory
 app.use(express.static('public'));
 
 // Use bodyParser to parse application/json
 app.use(bodyParser.json());
-
-// Use express-session for managing sessions
-app.use(session({
-    secret: 'your_secret_key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Set secure to true if using HTTPS
-}));
 
 // Database setup
 const db = new sqlite3.Database('./mydatabase.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
@@ -35,7 +48,7 @@ const db = new sqlite3.Database('./mydatabase.db', sqlite3.OPEN_READWRITE | sqli
         gender TEXT,
         description TEXT,
         photo TEXT
-    )`);
+            )`);
     db.run(`CREATE TABLE IF NOT EXISTS strategy_templates (
         template_id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER,
@@ -43,13 +56,13 @@ const db = new sqlite3.Database('./mydatabase.db', sqlite3.OPEN_READWRITE | sqli
         template_content TEXT,
         creation_date TEXT,
         FOREIGN KEY (user_id) REFERENCES users(id)
-    )`);
+        )`);
 });
 
 // Register new user
 app.post('/register', (req, res) => {
     const { firstname, lastname, email, password, age, gender, description, photo } = req.body;
-    const sql = `INSERT INTO users (firstname, lastname, email, password, age, gender, description, photo) 
+    const sql = `INSERT INTO users (firstname, lastname, email, password, age, gender, description, photo)
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     db.run(sql, [firstname, lastname, email, password, age, gender, description, photo], function (err) {
         if (err) {
@@ -104,6 +117,21 @@ app.post('/update-user', (req, res) => {
     }
 });
 
+// Endpoint to get user data
+app.get('/user/:email', (req, res) => {
+    const email = req.params.email;
+    const sql = `SELECT firstname, lastname, email, age, gender, description, photo FROM users WHERE email = ?`;
+    db.get(sql, [email], (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+        } else if (row) {
+            res.json(row);
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    });
+});
+
 // Check if user is logged in
 app.get('/check-login', (req, res) => {
     if (req.session.user) {
@@ -111,6 +139,28 @@ app.get('/check-login', (req, res) => {
     } else {
         res.json({ isLoggedIn: false });
     }
+});
+
+// Endpoint to save a template
+app.post('/save-template', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ error: 'User not logged in' });
+    }
+
+    const { strategyName, templateContent } = req.body;
+    const userId = req.session.user.id;
+    console.log(`Received request to save template: ${strategyName} for user ID: ${userId}`);
+
+    const sql = `INSERT INTO strategy_templates (user_id, strategy_name, template_content, creation_date) VALUES (?, ?, ?, datetime('now'))`;
+
+    db.run(sql, [userId, strategyName, templateContent], function(err) {
+        if (err) {
+            console.error('Error inserting template:', err);
+            return res.status(500).json({ error: err.message });
+        }
+        console.log(`Template ${strategyName} added with ID ${this.lastID}`);
+        res.json({ message: 'Template saved successfully', templateId: this.lastID });
+    });
 });
 
 // Endpoint to download a template
@@ -132,24 +182,6 @@ app.get('/download-template/:id', (req, res) => {
         } else {
             res.status(404).json({ error: 'Template not found' });
         }
-    });
-});
-
-// Endpoint to save a template
-app.post('/save-template', (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).json({ error: 'User not logged in' });
-    }
-
-    const { strategyName, templateContent } = req.body;
-    const userId = req.session.user.id;
-    const sql = `INSERT INTO strategy_templates (user_id, strategy_name, template_content, creation_date) VALUES (?, ?, ?, datetime('now'))`;
-
-    db.run(sql, [userId, strategyName, templateContent], function(err) {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.json({ message: 'Template saved successfully', templateId: this.lastID });
     });
 });
 

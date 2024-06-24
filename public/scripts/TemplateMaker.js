@@ -52,21 +52,27 @@ document.getElementById('strategyForm').addEventListener('submit', function(even
     const indicators = Array.from(document.getElementById('indicatorList').children).map(li => li.firstChild.textContent);
     const description = document.getElementById('description').value;
 
+    // Function to generate a random ID
+    function generateRandomId() {
+        return Math.floor(Math.random() * 1e18).toString();
+    }
+
     // Define the strategy details
     const strategyDetails = {
-        id: '133603774023127622',  // Example ID, generate or fetch as needed
+        id: generateRandomId(),  // Generate a random ID for the strategy
         symbol: 'EURUSD',
         description: description,
         period_type: 1,
         period_size: 1,
         digits: 5,
         tick_size: 0.000000,
-        position_time: new Date().getTime() / 1000 | 0,  // Current timestamp in seconds
+        position_time: Math.floor(new Date().getTime() / 1000),  // Current timestamp in seconds
         scale_fix: 0,
         scale_fixed_min: 1.0786,
         scale_fixed_max: 1.0893,
         windowHeight: 100  // Default height; adjust based on UI or requirements
     };
+
 
     // Generate the template content using the selected indicators and strategy details
     const tplContent = generateTplContent(indicators, strategyDetails);
@@ -87,8 +93,6 @@ document.getElementById('strategyForm').addEventListener('submit', function(even
         })
         .then(data => {
             if (data.templateId) {
-                // alert('Template saved successfully!');
-
                 // Reload templates to update the profile page
                 window.loadTemplates();
             } else {
@@ -290,7 +294,6 @@ arrow=0
 shift=0
 shift_y=0
 color=255
-</graph>
 period=20
 deviation=2.000000
 </indicator>`,

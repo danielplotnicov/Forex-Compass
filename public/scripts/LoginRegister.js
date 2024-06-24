@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    updateVisibility(); // Check login status and update UI accordingly
+    // Initial UI update based on login status
+    updateVisibility();
 
+    // Reference to the tab group and its individual tabs
     const tabGroup = document.querySelector('.tab-group');
     const tabs = tabGroup.querySelectorAll('li');
     const contents = document.querySelectorAll('.tab-content > div');
@@ -15,16 +17,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 content.classList.remove('active');
                 content.style.display = 'none';
             });
-            clearFields(); // Clear input fields when switching tabs
+            // Clear input fields when switching tabs
+            clearFields();
             // Activate the clicked tab and show corresponding content
             e.target.parentElement.classList.add('active');
             const activeContent = document.querySelector(e.target.getAttribute('href'));
             activeContent.classList.add('active');
             activeContent.style.display = 'block';
+
+            // Fetch user profile if the profile tab is activated
+            if (e.target.getAttribute('href') === '#profile') {
+                fetchUserProfile(window.data.user.email);
+            }
         }
     });
 
-    // Function to clear all input fields
+    // Function to clear all input fields in the forms
     function clearFields() {
         document.getElementById('signup-firstname').value = '';
         document.getElementById('signup-lastname').value = '';
@@ -43,8 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/logout', { method: 'POST' })
             .then(response => response.json())
             .then(data => {
-                updateVisibility(); // Update UI on logout
-                clearFields(); // Clear input fields on logout
+                // Update UI and clear fields after logging out
+                updateVisibility();
+                clearFields();
             });
     });
 
@@ -56,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = document.getElementById('signup-email').value;
         const password = document.getElementById('signup-password').value;
 
+        // Register new user
         fetch('/register', {
             method: 'POST',
             headers: {
@@ -65,10 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
             .then(response => response.json())
             .then(data => {
-                // alert(data.message); // Alert the user with the response message
-                if (data.id) { // Clear fields if registration is successful
+                if (data.id) {
                     clearFields();
-                    // Automatically log in the user after registration
+                    // Automatically log in the user after successful registration
                     fetch('/login', {
                         method: 'POST',
                         headers: {
@@ -79,8 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         .then(response => response.json())
                         .then(data => {
                             if (data.user) {
-                                updateVisibility(); // Update UI on successful login
-                                loadTemplates(); // Load templates after successful login
+                                updateVisibility();
+                                loadTemplates();
                             } else {
                                 alert('Automatic login failed. Please log in manually.');
                             }
@@ -91,13 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error:', error));
     }
 
-
     // Function to handle login form submission
     function submitLoginForm(e) {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
 
+        // Log in the user
         fetch('/login', {
             method: 'POST',
             headers: {
@@ -108,18 +117,17 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.user) {
-                    updateVisibility(); // Update UI on successful login
-                    loadTemplates(); // Load templates after successful login
+                    updateVisibility();
+                    loadTemplates();
                 } else {
-                    alert(data.error); // Alert the user if login fails
-                    clearFields(); // Optionally clear fields if login fails
+                    alert(data.error);
+                    clearFields();
                 }
             })
             .catch(error => console.error('Error:', error));
     }
 
-    // Function to update visibility based on login status
-    // Function to update visibility based on login status
+    // Function to update UI visibility based on login status
     function updateVisibility() {
         fetch('/check-login')
             .then(response => response.json())
@@ -127,10 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.data = data; // Make the data object globally accessible
 
                 if (data.isLoggedIn) {
-                    document.getElementById('logged-in').style.display = 'block';
-                    document.getElementById('not-logged-in').style.display = 'none';
+                    document.getElementById('logged-in').classList.remove('hidden');
+                    document.getElementById('not-logged-in').classList.add('hidden');
 
-                    // Set user information in spans
+                    // Display user information
                     document.getElementById('user-firstname-display').innerText = data.user.firstname;
                     document.getElementById('user-lastname-display').innerText = data.user.lastname;
                     document.getElementById('user-email-display').innerText = data.user.email;
@@ -139,34 +147,50 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('user-description-display').innerText = data.user.description;
                     document.getElementById('user-photo-display').innerText = data.user.photo;
 
-                    loadTemplates(); // Load templates when the user is logged in
+                    // Load user templates
+                    loadTemplates();
                 } else {
-                    document.getElementById('logged-in').style.display = 'none';
-                    document.getElementById('not-logged-in').style.display = 'block';
+                    document.getElementById('logged-in').classList.add('hidden');
+                    document.getElementById('not-logged-in').classList.remove('hidden');
                 }
             })
             .catch(error => console.error('Error:', error));
     }
 
+    // Function to fetch user profile information
+    function fetchUserProfile(email) {
+        fetch(`/user/${email}`)
+            .then(response => response.json())
+            .then(data => {
+                // Update profile fields with fetched data
+                document.getElementById('user-firstname-display').innerText = data.firstname;
+                document.getElementById('user-lastname-display').innerText = data.lastname;
+                document.getElementById('user-email-display').innerText = data.email;
+                document.getElementById('user-age-display').innerText = data.age;
+                document.getElementById('user-gender-display').innerText = data.gender;
+                document.getElementById('user-description-display').innerText = data.description;
+                document.getElementById('user-photo-display').innerText = data.photo;
+            })
+            .catch(error => console.error('Error fetching user profile:', error));
+    }
 
-    // Function to load templates
+    // Function to load user templates
     function loadTemplates() {
         fetch('/get-templates')
             .then(response => response.json())
             .then(data => {
                 const templateList = document.getElementById('template-list');
-                templateList.innerHTML = ''; // Clear previous entries
+                templateList.innerHTML = '';
+                // Populate the template list with fetched data
                 data.templates.forEach(template => {
                     const ul = document.createElement('ul');
                     ul.textContent = `${template.strategy_name} - Created on: ${template.creation_date}`;
 
-                    // Download button
                     const downloadButton = document.createElement('button');
                     downloadButton.textContent = 'Download';
                     downloadButton.className = 'downloadButton';
                     downloadButton.onclick = () => downloadTemplate(template.template_id);
 
-                    // Delete button
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Delete';
                     deleteButton.className = 'deleteButton';
@@ -201,8 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.message) {
-                    // alert(data.message); // Alert the user with the response message
-                    loadTemplates(); // Reload templates after deletion
+                    loadTemplates();
                 } else {
                     alert('Error deleting template');
                 }
@@ -210,31 +233,30 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error:', error));
     }
 
-    // Expose the loadTemplates function to be callable from other scripts
+    // Make the loadTemplates function globally accessible
     window.loadTemplates = loadTemplates;
 });
 
-// Function to switch to edit mode
+// Function to enable editing of user details
 function editUserDetails() {
-    // Toggle display of input fields and static text
     const displayElements = document.querySelectorAll('#logged-in span');
     const inputFields = document.querySelectorAll('#logged-in input, #logged-in textarea');
 
+    // Hide display elements and show input fields with current values
     displayElements.forEach(element => element.style.display = 'none');
     inputFields.forEach(input => {
-        input.style.display = 'inline'; // or 'block' depending on layout preference
-        // Set input value to corresponding display text
+        input.style.display = 'inline';
         const id = input.id;
         const displayId = id + "-display";
         input.value = document.getElementById(displayId).textContent.trim();
     });
 
-    // Hide 'Edit' button and show 'Save' button
+    // Toggle visibility of edit and save buttons
     document.getElementById('edit-user-details').style.display = 'none';
-    document.getElementById('save-user-details').style.display = 'inline'; // or 'block'
+    document.getElementById('save-user-details').style.display = 'inline';
 }
 
-// Function to save edited details
+// Function to save edited user details
 function saveUserDetails() {
     const age = document.getElementById('user-age').value;
     const gender = document.getElementById('user-gender').value;
@@ -244,7 +266,7 @@ function saveUserDetails() {
     const lastname = document.getElementById('user-lastname').value;
     const email = document.getElementById('user-email').value;
 
-    // Send updated data to server
+    // Update user details on the server
     fetch('/update-user', {
         method: 'POST',
         headers: {
@@ -254,9 +276,7 @@ function saveUserDetails() {
     })
         .then(response => response.json())
         .then(data => {
-            // alert(data.message);
-
-            // Update displayed text
+            // Update displayed values with saved data
             document.getElementById('user-firstname-display').textContent = firstname;
             document.getElementById('user-lastname-display').textContent = lastname;
             document.getElementById('user-email-display').textContent = email;
@@ -265,13 +285,11 @@ function saveUserDetails() {
             document.getElementById('user-description-display').textContent = description;
             document.getElementById('user-photo-display').textContent = photo;
 
-            // Toggle visibility back to static view
             const displayElements = document.querySelectorAll('#logged-in span');
             const inputFields = document.querySelectorAll('#logged-in input, #logged-in textarea');
             displayElements.forEach(element => element.style.display = '');
             inputFields.forEach(input => input.style.display = 'none');
 
-            // Hide 'Save' button and show 'Edit' button
             document.getElementById('save-user-details').style.display = 'none';
             document.getElementById('edit-user-details').style.display = '';
         })

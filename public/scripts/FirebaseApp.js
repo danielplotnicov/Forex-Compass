@@ -18,5 +18,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 });

@@ -1,17 +1,39 @@
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+html {
+    overflow-y: scroll;
+}
+
 body {
     background-color: #181818;
     color: #e0e0e0;
 }
 
+/* Variable Declarations */
+:root {
+    --body-bg: #c1bdba;
+    --form-bg: #282828;
+    --white: #ffffff;
+    --main: #6d8c3e;
+    --main-light: #8db551;
+    --main-dark: #4b612b;
+    --gray-light: #a0b3b0;
+    --gray: #ddd;
+    --thin: 300;
+    --normal: 400;
+    --bold: 600;
+    --br: 4px;
+}
+
+/* Container */
 .container {
     max-width: 80%;
-
     margin: 20px auto;
     padding: 20px;
     background-color: #282828;
@@ -20,6 +42,7 @@ body {
     overflow: hidden;
 }
 
+/* Headings */
 h1 {
     text-align: center;
     color: #ffffff;
@@ -27,6 +50,7 @@ h1 {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+/* Navbar */
 .navbar {
     width: 100%;
     overflow: hidden;
@@ -54,7 +78,7 @@ h1 {
     right: 2rem;
     height: 0;
     width: 300px;
-    background: rgba(255,255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
     border-radius: 4px;
     overflow: hidden;
@@ -74,14 +98,14 @@ h1 {
     align-items: center;
 }
 
-.navbar .toggle_btn{
+.navbar .toggle_btn {
     display: none;
 }
 
 .menubutton a {
     display: block;
     height: 100%;
-    text-decoration:none;
+    text-decoration: none;
     text-align: center;
     vertical-align: center;
     padding: 20px;
@@ -89,20 +113,21 @@ h1 {
     font-weight: 500;
     transition: color 0.3s ease;
     vertical-align: middle;
-    &:hover {
-        color: white;
-        background: var(--main);
-        border-radius: 4px;
-    }
 }
 
-.menubutton .active{
+.menubutton a:hover {
     color: white;
     background: var(--main);
     border-radius: 4px;
 }
 
-.menubutton{
+.menubutton .active {
+    color: white;
+    background: var(--main);
+    border-radius: 4px;
+}
+
+.menubutton {
     transition: transform 0.3s ease;
 }
 
@@ -113,20 +138,21 @@ h1 {
 .logobutton a {
     display: block;
     height: 100%;
-    text-decoration:none;
+    text-decoration: none;
     text-align: center;
     padding: 5px;
     color: #e0e0e0;
     font-weight: 500;
     transition: color 0.3s ease;
-    &:hover {
-        color: white;
-        background: var(--main);
-        border-radius: 4px;
-    }
 }
 
-.logobutton .active{
+.logobutton a:hover {
+    color: white;
+    background: var(--main);
+    border-radius: 4px;
+}
+
+.logobutton .active {
     color: white;
     background: var(--main);
     border-radius: 4px;
@@ -137,67 +163,14 @@ h1 {
     justify-content: flex-end;
 }
 
-/*Responsive Design*/
-@media (max-width: 992px) {
-    .navbar .menubutton{
-        display: none;
-    }
-    .navbar .toggle_btn {
-        display: block;
-        cursor: pointer;
-    }
-    .dropdown_menu{
-        display: block;
-    }
-}
-@media (max-width: 576px) {
-    .dropdown_menu {
-        left: 2rem;
-        width: unset;
-    }
-}
-/* Variable Declarations */
-:root {
-    --body-bg: #c1bdba;
-    --form-bg: #282828;
-    --white: #ffffff;
-    --main: #6d8c3e;
-    --main-light: #8db551;
-    --main-dark: #4b612b;
-    --gray-light: #a0b3b0;
-    --gray: #ddd;
-    --thin: 300;
-    --normal: 400;
-    --bold: 600;
-    --br: 4px;
-}
-
-/* Global Styles */
-*, *:before, *:after {
-    box-sizing: border-box;
-}
-
-html {
-    overflow-y: scroll;
-}
-
-a {
-    text-decoration: none;
-    color: var(--main);
-    transition: .5s ease;
-}
-a:hover {
-    color: var(--main-dark);
-}
-
 /* Form Styles */
 .form {
-    background: rgba(19, 35, 47, .9);
+    background: rgba(19, 35, 47, 0.9);
     padding: 40px;
     max-width: 600px;
     margin: 40px auto;
     border-radius: var(--br);
-    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
     z-index: 1;
 }
 
@@ -206,28 +179,32 @@ a:hover {
     padding: 0;
     margin: 0 0 40px 0;
 }
+
 .tab-group:after {
     content: "";
     display: table;
     clear: both;
 }
+
 .tab-group li a {
     display: block;
     text-decoration: none;
     padding: 15px;
-    background: rgba(160, 179, 176, .25);
+    background: rgba(160, 179, 176, 0.25);
     color: var(--gray-light);
     font-size: 20px;
     float: left;
     width: 50%;
     text-align: center;
     cursor: pointer;
-    transition: .5s ease;
+    transition: 0.5s ease;
 }
+
 .tab-group li a:hover {
     background: var(--main-dark);
     color: var(--white);
 }
+
 .tab-group .active a {
     background: var(--main);
     color: var(--white);
@@ -237,31 +214,36 @@ a:hover {
     display: none;
 }
 
-h1 {
-    text-align: center;
-    color: var(--white);
-    font-weight: var(--thin);
-    margin: 0 0 40px;
+.field-wrap {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.field-wrap.hidden {
+    display: none;
 }
 
 .field-wrap label {
     transform: translateY(6px);
     left: 13px;
-    color: rgba(var(--white), .5);
+    color: rgba(var(--white), 0.5);
     transition: all 0.25s ease;
     -webkit-backface-visibility: hidden;
     pointer-events: none;
     font-size: 22px;
 }
+
 label .req {
     margin: 2px;
     color: var(--main);
 }
+
 label.active {
     transform: translateY(50px);
     left: 2px;
     font-size: 14px;
 }
+
 label.highlight {
     color: var(--white);
 }
@@ -277,34 +259,31 @@ input, textarea {
     border: 1px solid var(--gray-light);
     color: var(--white);
     border-radius: 0;
-    transition: border-color .25s ease, box-shadow .25s ease;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
+
 input:focus, textarea:focus {
     outline: 0;
     border-color: var(--main);
 }
+
 textarea {
     border: 2px solid var(--gray-light);
     resize: vertical;
 }
 
-.field-wrap {
-    position: relative;
-    margin-bottom: 40px;
-}
-.field-wrap.hidden {
-    display: none;
-}
 .top-row:after {
     content: "";
     display: table;
     clear: both;
 }
+
 .top-row > div {
     float: left;
     width: 48%;
     margin-right: 4%;
 }
+
 .top-row > div:last-child {
     margin: 0;
 }
@@ -318,9 +297,11 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .button:hover, .button:focus {
     background: var(--main-dark);
 }
+
 .button-block {
     display: block;
     width: 100%;
@@ -335,6 +316,7 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .downloadButton:hover, .deleteButton:focus {
     background: var(--main-dark);
 }
@@ -353,13 +335,9 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .deleteButton:hover, .deleteButton:focus {
     background: #730d0d;
-}
-
-.forgot {
-    margin-top: -20px;
-    text-align: right;
 }
 
 .signInIcons {
@@ -369,32 +347,30 @@ textarea {
     margin: 20px auto;
 }
 
-
-
-
 .create-strategy-button {
     margin: 20px 0;
     display: block;
     height: 100%;
     line-height: 50px;
-    text-decoration:none;
+    text-decoration: none;
     text-align: center;
     padding: 0 20px;
     color: #e0e0e0;
     font-weight: 500;
     font-size: 36px;
     transition: color 0.3s ease;
-    &:hover {
-        color: #ffffff;
-        background: #202020;
-        border-radius: 4px;
-    }
 }
 
+.create-strategy-button:hover {
+    color: #ffffff;
+    background: #202020;
+    border-radius: 4px;
+}
 
 .form-group {
     margin-bottom: 20px;
 }
+
 .form-group label {
     display: block;
     margin-bottom: 10px;
@@ -416,6 +392,7 @@ textarea {
     color: #e0e0e0;
     box-sizing: border-box;
 }
+
 .form-group button {
     margin: 10px 0;
     padding: 10px 20px;
@@ -425,14 +402,17 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .form-group button:hover {
     background-color: var(--main-dark);
 }
+
 .indicator-list {
     margin-top: 10px;
     list-style-type: none;
     padding: 0;
 }
+
 .indicator-list li {
     background-color: #333333;
     margin: 5px 0;
@@ -442,7 +422,7 @@ textarea {
     justify-content: space-between;
 }
 
-
+/* Indicators */
 .indicator {
     background: var(--main-light);
     border-radius: 8px;
@@ -481,10 +461,16 @@ textarea {
 
 .indicator-content img {
     display: block;
-    width: 50%;
+    width: 60%;
     height: auto;
     margin: 0 auto 15px;
     transition: transform 0.3s ease;
+}
+
+@media (max-width: 992px) {
+    .indicator-content img {
+        width: 99%;
+    }
 }
 
 .indicator-header:hover {
@@ -498,4 +484,25 @@ textarea {
 .indicator.active .indicator-content {
     height: auto;
     transition: height 0.3s ease-in;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .navbar .menubutton {
+        display: none;
+    }
+    .navbar .toggle_btn {
+        display: block;
+        cursor: pointer;
+    }
+    .dropdown_menu {
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    .dropdown_menu {
+        left: 2rem;
+        width: unset;
+    }
 }
