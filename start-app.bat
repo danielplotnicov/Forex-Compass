@@ -19,6 +19,14 @@ IF %ERRORLEVEL% NEQ 0 (
     echo Node.js is already installed.
 )
 
+:: Check if npm dependencies are installed
+if not exist node_modules (
+    echo Installing npm dependencies...
+    npm install
+) ELSE  (
+    echo Node.js dependencies are already installed.
+)
+
 :: Start the server in a new command prompt window
 start cmd /k "node server.js"
 
